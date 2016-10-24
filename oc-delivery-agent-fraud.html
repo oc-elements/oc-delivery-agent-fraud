@@ -85,16 +85,13 @@ Element to display fraud for a single delivery agent on the Ordercloud platform
 
       _getFraud : function(organisationId, agentId, page, pageSize) {
         this.loading = true;
-        var criteria = {};
-        criteria.page = page || 1;
-        criteria.pageSize = pageSize || 20;
 
-        this.$.fraudApi.getDeliveryAgentFraud(organisationId, agentId, criteria)
+        this.$.fraudApi.getDeliveryAgentFraudList(agentId, page, pageSize)
                 .then(function(request){
 
                   this._fraudData = request.response.results;
                   this._totalItems = request.response.count;
-                  this._pageSize = 10;
+                  this._pageSize = pageSize || 10;
                   this._currentPage = 1;
 
                 }.bind(this))
